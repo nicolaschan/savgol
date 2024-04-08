@@ -54,7 +54,7 @@ impl Filter {
             return data.to_vec();
         }
         if data.len() < 2 * self.radius + 1 {
-            let radius = data.len() / 2;
+            let radius = (data.len() - 1) / 2;
             return Filter::new(radius, self.degree, self.derivative).smooth(data);
         }
         let mut smoothed = Vec::new();
@@ -132,6 +132,20 @@ mod tests {
         assert_float_eq(smoothed[2], -1.1142857142857143);
         assert_float_eq(smoothed[3], 0.34285714285714286);
         assert_float_eq(smoothed[4], 3.5142857142857142);
+    }
+
+    #[test]
+    fn smooth_5pt_quadratic_on_6pts_nonlinear_radius_too_large() {
+        let filter = super::Filter::new(20, 2, 0);
+        let data = vec![1.0, -2.0, 3.0, -4.0, 5.0, -6.0];
+        let smoothed = filter.smooth(data.as_slice());
+        assert_eq!(smoothed.len(), 6);
+        assert_float_eq(smoothed[0], 1.1142857142857143);
+        assert_float_eq(smoothed[1], -0.8571428571428571);
+        assert_float_eq(smoothed[2], -1.1142857142857143);
+        assert_float_eq(smoothed[3], 1.4857142857142858);
+        assert_float_eq(smoothed[4], -0.2571428571428571);
+        assert_float_eq(smoothed[5], -4.285714285714286);
     }
 
     #[test]
