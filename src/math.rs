@@ -20,7 +20,7 @@ fn gram_poly(i: i64, m: i64, k: i64, s: i64) -> f64 {
         * (gram_poly(i, m, k - 1, s) * i as f64 + gram_poly(i, m, k - 1, s - 1) * s as f64);
     let part2 =
         ((k - 1) * (2 * m + k)) as f64 / (k * (2 * m - k + 1)) as f64 * gram_poly(i, m, k - 2, s);
-    return part1 - part2;
+    part1 - part2
 }
 
 /// Calculates the weight of the i'th data point for the t'th Least-Square
