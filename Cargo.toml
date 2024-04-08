@@ -6,6 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+statrs = "0.16.0"
 
 [dev-dependencies]
-approx = "0.5.0"  # Use the latest version suitable for your needs
+approx = "0.5.0" # Use the latest version suitable for your needs
